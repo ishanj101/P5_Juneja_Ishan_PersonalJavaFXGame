@@ -1,6 +1,7 @@
 public class BallWorld extends World{
 
 	private Score score;
+	private long oldTime = 0;
 
 	public BallWorld(){
 		score = new Score();
@@ -11,7 +12,13 @@ public class BallWorld extends World{
 	
 	@Override
 	public void act(long now) {
-		
+		if(oldTime >= 500 && oldTime % 500 == 0) {
+
+			System.out.println("Here: " + oldTime);
+			
+		}
+		oldTime++;
+		System.out.println("Here: " + oldTime);
 	}
 
 	public Score getScore(){

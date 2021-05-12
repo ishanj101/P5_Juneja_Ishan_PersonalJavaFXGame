@@ -35,6 +35,19 @@ public class PowerUp extends Actor{
 	@Override
 	public void act(long now) {
 		
+		//paddle intersection
+		if(getOneIntersectingObject(Paddle.class)!=null){
+			if(type == 1) { //add a ball
+				TemporaryBall ball = new TemporaryBall();
+		        ball.setX(250);
+		        ball.setY(250);
+		        this.getWorld().add(ball);
+				System.out.println("Balls Shall Be Added");
+				this.getWorld().remove(this);
+			}
+			
+		}
+		
 		//World Boundaries
 		this.move(dx, dy);
 		if(getX() <= 0) {
@@ -56,15 +69,11 @@ public class PowerUp extends Actor{
 		
 	
 		
-		//paddle intersection
 		
-		/*
-		if(getOneIntersectingObject(Paddle.class)!=null){
-			if(type == 1) {
-				System.out.println("Balls Shall Be Added");
-			}
-		}
-		*/
+		
+		
+		
+		
 	}
 
 }
