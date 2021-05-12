@@ -16,32 +16,14 @@ public class Ball extends Actor{
 
 	@Override
 	public void act(long now) {
-		// TODO Auto-generated method stub
-		this.move(dx, dy);
-		if(getX() <= 0) {
-			dx = -dx;
-		}
-		if(getX() + getWidth() >= getWorld().getWidth()) {
-			dx = -dx;
-		}
 		
-		if(getY() <= 0) {
-			dy = -dy;
-		}
-		if(getY() + getHeight() >= getWorld().getHeight()) {
-			dy = -dy;
-			//((BallWorld)getWorld()).getScore().setScore(((BallWorld)getWorld()).getScore().getScoreCount()-1000);
-		}
 
-		if(getHeight() == getY()){
-			((BallWorld)getWorld()).getScore().setScore(((BallWorld)getWorld()).getScore().getScoreCount()-1000);
-		}
+		
 
-//		if(getOneIntersectingObject(Paddle.class)!=null){
-//			dy = -dy;
-//		}
-
+		
+		//normal brick intersection
 		if(getOneIntersectingObject(Brick.class)!=null){
+			Brick brick = getOneIntersectingObject(Brick.class);
 			double x = getOneIntersectingObject(Brick.class).getX();
 			double y = getOneIntersectingObject(Brick.class).getY();
 			if(getX() >= x && getX() <= x + getOneIntersectingObject(Brick.class).getWidth()){
@@ -55,14 +37,16 @@ public class Ball extends Actor{
 				dx = -dx;
 			}
 			((BallWorld)getWorld()).getScore().setScore(((BallWorld)getWorld()).getScore().getScoreCount()+100);
-			getWorld().remove(getOneIntersectingObject(Brick.class));
+			((BallWorld)getWorld()).getScore().updateDisplay();
+			brick.onHit();
+			
 		}
-
-//		if(getOneIntersectingObject(Paddle.class).isMoving()) {
-//			System.out.println("HI");
-//		}
-
+	
+		
+		//paddle intersection
+		
 		if(getOneIntersectingObject(Paddle.class)!=null){
+			System.out.println("1");
 			double x = getOneIntersectingObject(Paddle.class).getX();
 			double y = getOneIntersectingObject(Paddle.class).getY();
 			Paddle paddle = getOneIntersectingObject(Paddle.class);
@@ -86,7 +70,34 @@ public class Ball extends Actor{
 					dy = -dy;
 				}
 			}
+			
+		}else {
+			//bottom world scoring
+			if(this.getWorld().getHeight()-getHeight() <= getY()){
+				System.out.println("what");
+				((BallWorld)getWorld()).getScore().setScore(((BallWorld)getWorld()).getScore().getScoreCount()-1000);
+				((BallWorld)getWorld()).getScore().updateDisplay();
+			}
 		}
+		
+		
+
+		//World Boundaries
+		this.move(dx, dy);
+		if(getX() <= 0) {
+			dx = -dx;
+		}
+		if(getX() + getWidth() >= getWorld().getWidth()) {
+			dx = -dx;
+		}
+		
+		if(getY() <= 0) {
+			dy = -dy;
+		}
+		if(getY() + getHeight() >= getWorld().getHeight()) {
+			dy = -dy;
+		}
+		
 	}
 
 }

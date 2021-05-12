@@ -14,6 +14,8 @@ public class Game extends Application {
         // TODO Auto-generated method stub
         launch(args);
     }
+    BallWorld ballWorld;
+    Paddle paddle;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -22,30 +24,43 @@ public class Game extends Application {
 
         BorderPane rootNode = new BorderPane();
 
-        BallWorld ballWorld = new BallWorld();
+        ballWorld = new BallWorld();
         ballWorld.setPrefSize(500, 500);
         rootNode.setCenter(ballWorld);
 
         Ball ball = new Ball();
         ball.setX(250);
         ball.setY(250);
+        
+        PowerUp p1= new PowerUp();
+        p1.setX(250);
+        p1.setY(0);
+        
+        
 
-        Paddle paddle = new Paddle();
+        paddle = new Paddle();
         paddle.setX(250);
         paddle.setY(ballWorld.getPrefHeight() - paddle.getHeight());
 
-        double brickX = 40;
+        double brickX = 50;
         double brickY = 150;
+        double size = 0;
         for (int i = 0; i < 10; i++) {
-            for (int j = 10; j > i; j--) {
-                Brick brick = new Brick();
-                brick.setX(brickX);
-                brick.setY(brickY);
-                brickX += 40;
-                ballWorld.add(brick);
-            }
-            brickX = 40;
-            brickY += 10;
+            Brick brick = new Brick();
+            brick.setX(brickX);
+            brick.setY(brickY);
+            size = brick.getHeight();
+            brickX += brick.getWidth()+5;
+            ballWorld.add(brick);
+        }
+        brickX = 50;
+        brickY +=size;
+        for (int i = 0; i < 10; i++) {
+            Brick brick = new Brick(2);
+            brick.setX(brickX);
+            brick.setY(brickY);
+            brickX += brick.getWidth()+5;
+            ballWorld.add(brick);
         }
 
         ballWorld.setOnMouseMoved(new EventHandler<MouseEvent>() {
@@ -80,8 +95,11 @@ public class Game extends Application {
 
 
         ballWorld.add(ball);
+        ballWorld.add(p1);
         ballWorld.add(paddle);
         ballWorld.start();
+        
+        
 
         Scene scene = new Scene(rootNode);
         stage.setScene(scene);
