@@ -5,13 +5,29 @@ public class Paddle extends Actor{
 
     private double dx;
     private double pos;
+    private double w;
+    private double h;
 
     public Paddle(){
         String path = getClass().getClassLoader().getResource("resources/paddle.png").toString();
         Image img = new Image(path);
+        w = img.getWidth();
+        h = img.getHeight();
         this.setImage(img);
         dx = 0;
         pos = this.getX();
+    }
+    
+    public void increase() {
+    	String path = getClass().getClassLoader().getResource("resources/paddle.png").toString();
+    	Image img = new Image(path,w+50,h+25,true,true);
+    	this.setImage(img);
+    }
+    
+    public void decrease() {
+    	 String path = getClass().getClassLoader().getResource("resources/paddle.png").toString();
+         Image img = new Image(path);
+    	this.setImage(img);
     }
 
     @Override
@@ -34,6 +50,7 @@ public class Paddle extends Actor{
 
     public double getDx(){
         return dx;
+        
     }
 
     public double getPos() {

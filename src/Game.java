@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -15,8 +17,12 @@ public class Game extends Application {
         launch(args);
     }
     BallWorld ballWorld;
-    Paddle paddle;
+    static Paddle paddle;
 
+    public Paddle getPaddle() {
+    	return paddle;
+    }
+    
     @Override
     public void start(Stage stage) throws Exception {
         // TODO Auto-generated method stub
@@ -32,9 +38,12 @@ public class Game extends Application {
         ball.setX(250);
         ball.setY(250);
         
+        //ballWorld.actt();
+        
         PowerUp p1= new PowerUp();
         p1.setX(250);
         p1.setY(0);
+
         
         
 
@@ -95,10 +104,11 @@ public class Game extends Application {
 
 
         ballWorld.add(ball);
-        ballWorld.add(p1);
         ballWorld.add(paddle);
+        ballWorld.add(p1);
         ballWorld.start();
         
+       
         
 
         Scene scene = new Scene(rootNode);
