@@ -43,7 +43,9 @@ public class Game extends Application {
         PowerUp p1= new PowerUp();
         p1.setX(250);
         p1.setY(0);
+        ballWorld.getChildren().add(p1);
 
+        ballWorld.addPower();
         
         
 
@@ -105,7 +107,6 @@ public class Game extends Application {
 
         ballWorld.add(ball);
         ballWorld.add(paddle);
-        ballWorld.add(p1);
         ballWorld.start();
         
        

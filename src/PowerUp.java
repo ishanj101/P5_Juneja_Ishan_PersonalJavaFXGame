@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Random;
 
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -8,33 +9,51 @@ public class PowerUp extends Actor{
 	private double dx;
 	private double dy;
 	private int type;
-	
-	public PowerUp() {
+	/*
+	public PowerUp(boolean t) {
+		Random rand = new Random();
+		double speed = rand.nextInt(3)+3;
+		int category = rand.nextInt(3);
+		int xPos = rand.nextInt(500);
 		String path = getClass().getClassLoader().getResource("resources/power1.png").toString();
-		Image img = new Image(path,30,30, true,false);
-		
+		Image img = new Image(path,35, 35, true,false);
 		this.setImage(img);
-		type = 0;
+	
 		dx = 0;
-		dy = 2;
+		dy = 3;
+		type = category;
+		this.setX(xPos);
+		this.setY(0);
+		
+		
 	}
 	
-	public PowerUp(int category, int speed) {
-		//1 adds more balls
-		
-		
-		if(category == 0) {
-			String path = getClass().getClassLoader().getResource("resources/power1.png").toString();
-			Image img = new Image(path,30, 30, true,false);
-			this.setImage(img);
-		}else if(category ==1) {
-			String path = getClass().getClassLoader().getResource("resources/power1.png").toString();
-			Image img = new Image(path,30, 30, true,false);
-			this.setImage(img);
-		}
+	public PowerUp() {
+		Random rand = new Random();
+		double speed = rand.nextInt(3)+3;
+		int category = rand.nextInt(3);
+		int xPos = rand.nextInt(500);
+	
+
+	
+		dx = 0;
+		dy = 3;
 		type = category;
-		dx = 0; dy =speed;
+		this.setX(xPos);
+		this.setY(speed);
 		
+		
+	}
+	
+	*/
+	public PowerUp() {
+		String path = getClass().getClassLoader().getResource("resources/power1.png").toString();
+		Image img = new Image(path,30, 30, true,false);
+		
+		this.setImage(img);
+		type = 2;
+		dx = 0;
+		dy = 2;
 	}
 
 
@@ -58,6 +77,21 @@ public class PowerUp extends Actor{
 					}
 				}
 			}
+			if(type == 2) {
+				for(Node actor: this.getWorld().getChildren()) {
+					if(actor instanceof Ball) {
+						double x = ((Ball) actor).getX();
+						double y = ((Ball) actor).getY();
+						((Ball) actor).getWorld().remove((Ball)actor);
+						FieryBall ball2 = new FieryBall();
+					
+						ball2.setX(x);
+						ball2.setY(y);
+						this.getWorld().add(ball2);
+					}
+				}
+			}
+			
 		}
 		
 		//World Boundaries

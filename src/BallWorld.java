@@ -13,7 +13,6 @@ public class BallWorld extends World{
 		addPower();
 		
 	}
-	
 	public void addPower() {
 		/*
 		Random rand = new Random();
@@ -32,12 +31,13 @@ public class BallWorld extends World{
         p1.setX(xPos);
         p1.setY(0);
 	    this.getChildren().add(p1);
-	    
+	    System.out.println("aiuneounuowegnouwegiwe");
 		
 	}
-	
 	@Override
 	public void act(long now) {
+		
+		
 		Random rand = new Random();
 		int cond = rand.nextInt(2);
 	    
@@ -66,6 +66,7 @@ public class BallWorld extends World{
 		oldTime++;
 		
 	}
+	
 
 	public Score getScore(){
 		return score;
