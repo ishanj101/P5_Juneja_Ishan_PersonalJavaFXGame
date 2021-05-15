@@ -46,6 +46,7 @@ public class PowerUp extends Actor{
 	}
 	
 	*/
+	
 	public PowerUp() {
 		String path = getClass().getClassLoader().getResource("resources/power1.png").toString();
 		Image img = new Image(path,30, 30, true,false);

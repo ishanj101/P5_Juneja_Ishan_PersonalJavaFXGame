@@ -68,7 +68,8 @@ public class Enemy extends Actor{
 	
 		
 		//World Boundaries
-		this.move(dx, dy);
+		this.move(dx, 0);
+		this.move(0, dy);
 		if(getX() <= 0) {
 			dx = -dx;
 		}
