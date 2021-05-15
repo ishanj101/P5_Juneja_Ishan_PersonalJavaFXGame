@@ -40,12 +40,7 @@ public class Game extends Application {
         
         //ballWorld.actt();
         
-        PowerUp p1= new PowerUp();
-        p1.setX(250);
-        p1.setY(0);
-        ballWorld.getChildren().add(p1);
-
-        ballWorld.addPower();
+       
         
         
 

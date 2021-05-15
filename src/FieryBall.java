@@ -84,8 +84,29 @@ public class FieryBall extends Actor{
 	@Override
 	public void act(long now) {
 		
+	
 		conditions();
-		conditions();
+		if(getOneIntersectingObject(Brick.class)!=null){
+			Brick brick = getOneIntersectingObject(Brick.class);
+			double x = getOneIntersectingObject(Brick.class).getX();
+			double y = getOneIntersectingObject(Brick.class).getY();
+			if(getX() >= x && getX() <= x + getOneIntersectingObject(Brick.class).getWidth()){
+				dy = -dy;
+				this.setY(this.getY()-1);
+			}
+			else if(getY() >= y && getY() <= y + getOneIntersectingObject(Brick.class).getHeight()){
+				dx = -dx;
+			}
+			else{
+				dy = -dy;
+				this.setY(this.getY()-1);
+				dx = -dx;
+			}
+			((BallWorld)getWorld()).getScore().setScore(((BallWorld)getWorld()).getScore().getScoreCount()+100);
+			((BallWorld)getWorld()).getScore().updateDisplay();
+			brick.onHit();
+			
+		}
 		
 		//World Boundaries
 		this.move(dx, dy);

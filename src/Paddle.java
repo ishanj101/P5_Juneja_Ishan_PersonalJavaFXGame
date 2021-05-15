@@ -7,6 +7,7 @@ public class Paddle extends Actor{
     private double pos;
     private double w;
     private double h;
+    private boolean big = false;
 
     public Paddle(){
         String path = getClass().getClassLoader().getResource("resources/paddle.png").toString();
@@ -44,6 +45,12 @@ public class Paddle extends Actor{
         }
     }
 
+    public boolean isBig() {
+    	return big;
+    }
+    public void setBig(boolean a) {
+    	big = a;
+    }
     public void setDx(double change){
         dx = change;
     }

@@ -49,9 +49,10 @@ public class PowerUp extends Actor{
 	public PowerUp() {
 		String path = getClass().getClassLoader().getResource("resources/power1.png").toString();
 		Image img = new Image(path,30, 30, true,false);
-		
+		Random rand = new Random();
+		int cond = rand.nextInt(3);
 		this.setImage(img);
-		type = 2;
+		type = cond;
 		dx = 0;
 		dy = 2;
 	}
@@ -74,12 +75,13 @@ public class PowerUp extends Actor{
 				for(Node actor: this.getWorld().getChildren()) {
 					if(actor instanceof Paddle) {
 						((Paddle) actor).increase();
+						((Paddle)actor).setBig(true);
 					}
 				}
 			}
 			if(type == 2) {
 				for(Node actor: this.getWorld().getChildren()) {
-					if(actor instanceof Ball) {
+					if(actor instanceof Ball && !(actor instanceof TemporaryBall)) {
 						double x = ((Ball) actor).getX();
 						double y = ((Ball) actor).getY();
 						((Ball) actor).getWorld().remove((Ball)actor);

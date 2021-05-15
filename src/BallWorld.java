@@ -1,5 +1,7 @@
 import java.util.Random;
 
+import javafx.scene.Node;
+
 public class BallWorld extends World{
 
 	private Score score;
@@ -39,32 +41,51 @@ public class BallWorld extends World{
 		
 		
 		Random rand = new Random();
-		int cond = rand.nextInt(2);
+		int cond = rand.nextInt(3);
 	    
 		if(cond == 1 ) {
-			if(oldTime % 500 == 0) {
+			if(oldTime % 600 == 0) {
 				addPower();
 				oldTime = 1;
 				
 			}
 		
 		}else if(cond == 2 || cond == 1) {
-			if(oldTime % 800 == 0) {
+			if(oldTime % 1300 == 0) {
 				addPower();
 				oldTime = 1;
 			}
 		}else if(cond == 0) {
-			if(oldTime % 600 == 0) {
+			if(oldTime % 1000 == 0) {
 				addPower();
 				oldTime = 1;
 			}
-		}else if(oldTime == 1000) {
+		}else if(oldTime == 1800) {
 			addPower();
 			oldTime = 1;
 			System.out.println("Aaaaaaa");
 		}
 		oldTime++;
 		
+		if(oldTime == 1000 - (cond*100)) {
+			for(Node actor: this.getChildren()) {
+				if(actor instanceof Paddle) {
+					if(((Paddle) actor).isBig()){
+						((Paddle) actor).decrease();
+						((Paddle)actor).setBig(false);
+					}
+				}
+				if(actor instanceof FieryBall) {
+					double x = ((FieryBall) actor).getX();
+					double y = ((FieryBall) actor).getY();
+					((FieryBall) actor).getWorld().remove((FieryBall)actor);
+					Ball ball2 = new Ball();
+					ball2.setX(x);
+					ball2.setY(y);
+					this.getChildren().add(ball2);
+				}
+			}
+		}
 	}
 	
 
