@@ -17,7 +17,6 @@ public class TemporaryBall extends Ball {
 	public void act(long now) {
 		
 		if(getOneIntersectingObject(Brick.class)!=null){
-			this.getWorld().setBricksHit(this.getWorld().getBricksHit()+1);
 			Brick brick = getOneIntersectingObject(Brick.class);
 			double x = getOneIntersectingObject(Brick.class).getX();
 			double y = getOneIntersectingObject(Brick.class).getY();

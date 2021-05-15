@@ -15,8 +15,6 @@ public class BallWorld extends World{
 		addPower();
 		
 	}
-	
-	
 	public void addPower() {
 		/*
 		Random rand = new Random();
@@ -45,16 +43,6 @@ public class BallWorld extends World{
 		Random rand = new Random();
 		int cond = rand.nextInt(3);
 	    
-		
-		
-		if(this.getBricksHit() != 0 && this.getBricksHit()%8 == 0) {
-			int i = rand.nextInt(2);
-			Enemy en = new Enemy(1);
-	        en.setX(100);
-	        en.setY(100);
-	        this.add(en);
-	        this.setBricksHit(i);
-		}
 		if(cond == 1 ) {
 			if(oldTime % 600 == 0) {
 				addPower();
