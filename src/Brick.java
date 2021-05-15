@@ -32,6 +32,16 @@ public class Brick extends Actor{
 		 }
     }
     
+    public void strengthen() {
+    	 if(hitCounter == 1) {
+    		 String path;
+    		 path = getClass().getClassLoader().getResource("resources/brick2.png").toString();
+    		 Image img = new Image(path);
+    		 this.setImage(img);
+    		 hitCounter++;
+    	 }
+    }
+    
     @Override
     public void act(long now) {
 

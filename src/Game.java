@@ -47,6 +47,11 @@ public class Game extends Application {
         paddle = new Paddle();
         paddle.setX(250);
         paddle.setY(ballWorld.getPrefHeight() - paddle.getHeight());
+        
+        Enemy trial = new Enemy();
+        trial.setX(100);
+        trial.setY(100);
+        ballWorld.add(trial);
 
         double brickX = 50;
         double brickY = 150;
