@@ -48,10 +48,7 @@ public class Game extends Application {
         paddle.setX(250);
         paddle.setY(ballWorld.getPrefHeight() - paddle.getHeight());
         
-        Enemy trial = new Enemy();
-        trial.setX(100);
-        trial.setY(100);
-        ballWorld.add(trial);
+        
 
         double brickX = 50;
         double brickY = 150;
@@ -73,7 +70,10 @@ public class Game extends Application {
             brickX += brick.getWidth()+5;
             ballWorld.add(brick);
         }
-
+        Enemy en = new Enemy(1);
+        en.setX(100);
+        en.setY(100);
+        ballWorld.add(en);
         ballWorld.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

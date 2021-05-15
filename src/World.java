@@ -13,6 +13,7 @@ public abstract class World extends Pane{
 	private AnimationTimer timer;
 	private World world = this;
 	private HashSet<KeyCode> keys;
+	private int bricksHit;
 	
 	public World() {
 		//List<Actor> actor = this.getChildren();
@@ -28,6 +29,13 @@ public abstract class World extends Pane{
 			}
 		};
 		keys = new HashSet<>();
+	}
+	
+	public int getBricksHit() {
+		return bricksHit;
+	}
+	public void setBricksHit(int i) {
+		bricksHit = i;
 	}
 	
 	public abstract void act(long now);
