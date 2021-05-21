@@ -1,6 +1,6 @@
 import javafx.scene.image.Image;
 
-public class FieryBall extends Actor{
+public class FieryBall extends Ball{
 	
 	private double dx;
 	private double dy;

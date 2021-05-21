@@ -42,12 +42,16 @@ public class BallWorld extends World{
 		
 		Random rand = new Random();
 		int cond = rand.nextInt(3);
+		int cond2 = rand.nextInt(2);
+		
+	    int xx = rand.nextInt((int) this.getWidth());
+	    int yy = rand.nextInt((int) this.getHeight());
 	    
 		if(this.getBricksHit() != 0 && this.getBricksHit()%8 == 0) {
 			int i = rand.nextInt(2);
-			Enemy en = new Enemy(1);
-	        en.setX(100);
-	        en.setY(100);
+			Enemy en = new Enemy(cond2);
+	        en.setX(xx);
+	        en.setY(yy);
 	        this.add(en);
 	        this.setBricksHit(i);
 		}
@@ -71,12 +75,19 @@ public class BallWorld extends World{
 		}else if(oldTime == 1800) {
 			addPower();
 			oldTime = 1;
-			System.out.println("Aaaaaaa");
 		}
 		oldTime++;
 		
-		if(oldTime == 1000 - (cond*100)) {
+		if(oldTime == (1000 - (cond*100))) {
 			for(Node actor: this.getChildren()) {
+				if(actor instanceof Ball && !(actor instanceof TemporaryBall) &&!(actor instanceof FieryBall)) {
+					double x = ((Ball) actor).getX();
+					double y = ((Ball) actor).getY();
+					System.out.println(((Ball) actor).getHeight());
+					System.out.println(((Ball) actor).getWidth());
+					((Ball) actor).setFitHeight(14);
+					((Ball) actor).setFitWidth(14);
+				}
 				if(actor instanceof Paddle) {
 					if(((Paddle) actor).isBig()){
 						((Paddle) actor).decrease();

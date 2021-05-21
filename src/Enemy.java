@@ -1,5 +1,6 @@
 import java.util.Random;
 
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 
 public class Enemy extends Actor{
@@ -48,10 +49,8 @@ public class Enemy extends Actor{
 				this.setY(this.getY()-1);
 				dx = -dx;
 			}
-			((BallWorld)getWorld()).getScore().setScore(((BallWorld)getWorld()).getScore().getScoreCount()+100);
-			((BallWorld)getWorld()).getScore().updateDisplay();
 			Random rand = new Random();
-			int cond = rand.nextInt(3);
+			int cond = rand.nextInt(2);
 			if(cond == 0) {
 				brick.strengthen();
 			}
@@ -65,7 +64,16 @@ public class Enemy extends Actor{
 			this.getWorld().getChildren().remove(this);
 		}
 		if(getOneIntersectingObject(Paddle.class)!=null) {
-		
+			for(Node actor: this.getWorld().getChildren()) {
+				if(actor instanceof Ball && !(actor instanceof TemporaryBall) &&!(actor instanceof FieryBall)) {
+					double x = ((Ball) actor).getX();
+					double y = ((Ball) actor).getY();
+					System.out.println(((Ball) actor).getHeight());
+					System.out.println(((Ball) actor).getWidth());
+					((Ball) actor).setFitHeight(9);
+					((Ball) actor).setFitWidth(9);
+				}
+			}
 			double x = getOneIntersectingObject(Paddle.class).getX();
 			double y = getOneIntersectingObject(Paddle.class).getY();
 			Paddle paddle = getOneIntersectingObject(Paddle.class);

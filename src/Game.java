@@ -57,7 +57,7 @@ public class Game extends Application {
         double brickY = 150;
         double size = 0;
         for (int i = 0; i < 10; i++) {
-            Brick brick = new Brick();
+            Brick brick = new Brick(4);
             brick.setX(brickX);
             brick.setY(brickY);
             size = brick.getHeight();
