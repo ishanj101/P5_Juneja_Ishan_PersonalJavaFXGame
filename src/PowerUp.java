@@ -53,7 +53,6 @@ public class PowerUp extends Actor{
 		Random rand = new Random();
 		int cond = rand.nextInt(3);
 		this.setImage(img);
-		cond = 2;
 		type = cond;
 		dx = 0;
 		dy = 2;

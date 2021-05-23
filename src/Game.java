@@ -78,9 +78,14 @@ public class Game extends Application {
             @Override
             public void handle(MouseEvent event) {
                 //paddle.setMoving(true);
+                if(event.getX()> paddle.getX()) {
+                	paddle.setDx(2);
+                }else {
+                	paddle.setDx(-2);
+                }
                 if (event.getX() <= ballWorld.getWidth() - paddle.getWidth()) paddle.setX(event.getX());
-                paddle.setDx(event.getX() - paddle.getX());
                 paddle.setPos(event.getX());
+
             }
         });
 

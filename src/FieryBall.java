@@ -12,7 +12,7 @@ public class FieryBall extends Ball{
 		Image img = new Image(path,30, 30, true,false);
 		this.setImage(img);
 		dx = 4.25;
-		dy = -3;
+		dy = -6;
 		maxDX = dx * 1.1;
 		maxDY = dy * 1.1;
 	}
@@ -93,7 +93,7 @@ public class FieryBall extends Ball{
 		//World Boundaries
 		this.move(dx, dy);
 		
-		if(getX() <= 0) {
+		if(getX() <= 0.1) {
 			dx = -dx;
 		}
 		if(getX() + getWidth() >= getWorld().getWidth()) {

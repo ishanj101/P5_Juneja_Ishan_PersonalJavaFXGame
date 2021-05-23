@@ -50,29 +50,46 @@ public class Ball extends Actor{
 
 					if((paddle.getDx()==0 || paddle.getPos() == paddle.getX()) && getX() >= x && getX() <= x + getOneIntersectingObject(Paddle.class).getWidth()){
 						dy = -dy;
+						if(dx < 0 && dx < -maxDX) {
+							dx = dx + 0.5;
+				
+						}else {
+							dx = dx - 0.5;
+						}
+						if(dy < 0 && dy < -maxDY) {
+							dy = dy + 0.25;
+				
+						}else {
+							dy = dy - 0.25;
+						}
+						this.setY(this.getY()-2);
 					}
 					if(paddle.getDx()!=0 ){
-						System.out.println("Checking 1");
-						if((paddle.getDx() < 0 || paddle.getPos() > paddle.getX()) &&
-								getX() <= paddle.getX() + paddle.getWidth()/3){
-							dx = -Math.abs(dx);
+						
+						if((paddle.getDx() < 0 && ( getX() > paddle.getPos()|| getX() < (paddle.getPos() + paddle.getWidth()/3)))){ //getX() < paddle.getPos() + 2*(paddle.getWidth()/8)
+							System.out.println("Checking 1");
+							dx = -Math.abs(dx)-0.5;
 							dy = -dy;
+							if(dy > 0) {
+								dy = dy + 0.26;
+							}else {
+								dy = dy - 0.26;
+							}
 							this.setY(this.getY()-1);
 						}
-						else if(getX() <= paddle.getX() + (paddle.getWidth()*2)/3){
+						else if(getX() <= paddle.getPos() + (paddle.getWidth()*2)/3){
 							dy = - dy;
 							this.setY(this.getY()-1);
 						}
-						else if(((paddle.getDx() > 0 || paddle.getPos() < paddle.getX())) &&
-						getX() >= paddle.getX() + (paddle.getWidth()*2)/3){
-							dx = Math.abs(dx);
+						else {
+							dx = Math.abs(dx)+0.5;
+							
 							dy = -dy;
 							this.setY(this.getY()-1);
 						}
 					}
 					
 					if(true){
-						System.out.println("Checkin 2");
 						if(getX() < paddle.getPos() + (paddle.getWidth()/8) || getX() >  paddle.getPos() + 7*(paddle.getWidth()/8)  ) {
 							if(dx < 0) {
 								dx = -maxDX;
@@ -108,6 +125,11 @@ public class Ball extends Actor{
 							}else {
 								dx = maxDX*0.5;
 							}
+							if(dy > 0) {
+								dy = dy + 0.25;
+							}else {
+								dy = dy - 0.25;
+							}
 							dy = -maxDY*1.25;
 						}
 						
@@ -132,6 +154,7 @@ public class Ball extends Actor{
 		
 		//World Boundaries
 		this.move(dx, dy);
+		
 		if(getX() <= 0) {
 			dx = -dx;
 		}
@@ -144,6 +167,13 @@ public class Ball extends Actor{
 		}
 		if(getY() + getHeight() >= getWorld().getHeight()) {
 			dy = -dy;
+		}
+		
+		if(dx < 0) {
+			this.setX(getX()-1);
+
+		}else {
+			this.setX(getX()+1);
 		}
 		
 	}

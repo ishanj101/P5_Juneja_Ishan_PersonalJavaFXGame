@@ -6,7 +6,7 @@ public class BallWorld extends World{
 
 	private Score score;
 	private long oldTime = 1;
-
+	private long ime = 1;
 	public BallWorld(){
 		score = new Score();
 		score.setX(30);
@@ -68,17 +68,18 @@ public class BallWorld extends World{
 				oldTime = 1;
 			}
 		}else if(cond == 0) {
-			if(oldTime % 1200 == 0) {
+			if(oldTime % 1100 == 0) {
 				addPower();
 				oldTime = 1;
 			}
-		}else if(oldTime == 1500) {
+		}else if(oldTime == 1200) {
 			addPower();
 			oldTime = 1;
 		}
 		oldTime++;
-		
-		if(oldTime == (1000 - (cond*100))) {
+		ime++;
+		if(ime == 1000) {
+			ime = 1;
 			for(Node actor: this.getChildren()) {
 				if(actor instanceof Ball && !(actor instanceof TemporaryBall) &&!(actor instanceof FieryBall)) {
 					double x = ((Ball) actor).getX();
@@ -106,6 +107,12 @@ public class BallWorld extends World{
 				}
 			}
 		}
+		/*for(Node actor: this.getChildren()) {
+			if(actor instanceof Paddle) {
+				System.out.println( ((Paddle)actor).getDx() );
+			}
+		
+		}*/
 	}
 	
 
