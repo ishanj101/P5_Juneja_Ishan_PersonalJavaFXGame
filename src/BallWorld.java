@@ -63,16 +63,16 @@ public class BallWorld extends World{
 			}
 		
 		}else if(cond == 2 || cond == 1) {
-			if(oldTime % 1300 == 0) {
+			if(oldTime % 900 == 0) {
 				addPower();
 				oldTime = 1;
 			}
 		}else if(cond == 0) {
-			if(oldTime % 1000 == 0) {
+			if(oldTime % 1200 == 0) {
 				addPower();
 				oldTime = 1;
 			}
-		}else if(oldTime == 1800) {
+		}else if(oldTime == 1500) {
 			addPower();
 			oldTime = 1;
 		}
@@ -87,6 +87,7 @@ public class BallWorld extends World{
 					System.out.println(((Ball) actor).getWidth());
 					((Ball) actor).setFitHeight(14);
 					((Ball) actor).setFitWidth(14);
+					
 				}
 				if(actor instanceof Paddle) {
 					if(((Paddle) actor).isBig()){

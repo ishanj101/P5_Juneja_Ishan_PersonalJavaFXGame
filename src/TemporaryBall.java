@@ -10,6 +10,7 @@ public class TemporaryBall extends Ball {
 		dy = -2.25;
 	}
 	
+	
 	private double dx;
 	private double dy;
 	

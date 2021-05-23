@@ -127,9 +127,9 @@ public class Enemy extends Actor{
 				counter = 0;
 			}
 			if(moveWay) {
-				this.move(dx*1.05, 0);
+				this.move(dx*1.15, 0);
 			}else {
-				this.move(0, dy*1.4);
+				this.move(0, dy*2);
 			}
 			
 		}
