@@ -5,6 +5,9 @@ public class Brick extends Actor{
 	double width;
 	double height;
 	boolean canMove = false;
+	int moveCounter = 0;
+	int dx = 0;
+	int dy = 0;
 	
     public Brick(){
     	hitCounter = 1;
@@ -38,7 +41,29 @@ public class Brick extends Actor{
         hitCounter = hitC;
     }
     
-    public Brick(int hitC, boolean canMoves) {
+    public Brick(int hitC, boolean canMoves, int dxx, int dyy) {
+    	dx = dxx;
+    	dy = dyy;
+    	canMove = canMoves;
+    	setDimensions();
+    	String path;
+    	if(hitC >= 4) {
+    		path = getClass().getClassLoader().getResource("resources/mbrick2.png").toString();
+    	}else
+    	if(hitC == 3) {
+    		path = getClass().getClassLoader().getResource("resources/mbrick1.png").toString();
+    	}else
+    	if(hitC == 2) {
+    		path = getClass().getClassLoader().getResource("resources/brick2.png").toString();
+    	}else {
+    		path = getClass().getClassLoader().getResource("resources/brick.png").toString();
+    	}
+        Image img = new Image(path,35,30, true,true);
+        this.setImage(img);
+        setDimensions();
+        this.setFitWidth(width);
+        this.setFitHeight(height);
+        hitCounter = hitC;
     	
     }
     
@@ -110,6 +135,16 @@ public class Brick extends Actor{
     
     @Override
     public void act(long now) {
-
+    	if(canMove && moveCounter <= 35) {
+    		this.setX(this.getX()+ dx);
+    		this.setY(this.getY()+ dy);
+    	}else if(canMove){
+    		this.setX(this.getX()- dx);
+    		this.setY(this.getY()+ dy);
+    	}
+    	if(moveCounter >= 70) {
+    		moveCounter = 0;
+    	}
+    	moveCounter++;
     }
 }

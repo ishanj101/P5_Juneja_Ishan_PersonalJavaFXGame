@@ -7,6 +7,7 @@ public class BallWorld extends World{
 	private Score score;
 	private long oldTime = 1;
 	private long ime = 1;
+	int lives = 3;
 	public BallWorld(){
 		score = new Score();
 		score.setX(30);
@@ -107,6 +108,11 @@ public class BallWorld extends World{
 				}
 			}
 		}
+		if(lives == 0) {
+			for(Node actor: this.getChildren()) {
+				this.remove((Actor)actor);
+			}
+		}
 		/*for(Node actor: this.getChildren()) {
 			if(actor instanceof Paddle) {
 				System.out.println( ((Paddle)actor).getDx() );
@@ -115,7 +121,14 @@ public class BallWorld extends World{
 		}*/
 	}
 	
-
+	public int getLife() {
+		return lives;
+	}
+	
+	public void setLife(int life) 
+	{
+		lives = life;
+	}
 	public Score getScore(){
 		return score;
 	}

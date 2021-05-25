@@ -14,8 +14,19 @@ public class Ball extends Actor{
 		dx = 5;
 		dy = -3;
 		
-		maxDX = 4+0.5;
-		maxDY = 2.75+0.25;
+		maxDX = 5+0.5;
+		maxDY = 3+0.25;
+	}
+	
+	public Ball(int dxx, int dyy) {
+		String path = getClass().getClassLoader().getResource("resources/ball.png").toString();
+		Image img = new Image(path);
+		this.setImage(img);
+		dx = dxx;
+		dy = -dyy;
+		
+		maxDX = dxx+0.5;
+		maxDY = dyy+0.25;
 	}
 
 
@@ -141,6 +152,7 @@ public class Ball extends Actor{
 						System.out.println("what");
 						((BallWorld)getWorld()).getScore().setScore(((BallWorld)getWorld()).getScore().getScoreCount()-1000);
 						((BallWorld)getWorld()).getScore().updateDisplay();
+						((BallWorld)getWorld()).setLife(((BallWorld)getWorld()).getLife()-1);
 					}
 				}
 				
