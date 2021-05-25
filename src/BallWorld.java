@@ -22,15 +22,13 @@ public class BallWorld extends World{
 	private long oldTime = 1;
 	private long ime = 1;
 	int lives = 3;
-	int brickCount = 0;
 	public BallWorld(int bricks){
 		score = new Score();
 		score.setX(30);
 		score.setY(30);
 		this.getChildren().add(score);
 		addPower();
-		brickCount = bricks;
-		
+		setBrickCount(bricks);
 	}
 	public void addPower() {
 		/*
@@ -50,7 +48,6 @@ public class BallWorld extends World{
         p1.setX(xPos);
         p1.setY(0);
 	    this.getChildren().add(p1);
-	    System.out.println("aiuneounuowegnouwegiwe");
 		
 	}
 	@Override
@@ -101,8 +98,6 @@ public class BallWorld extends World{
 				if(actor instanceof Ball && !(actor instanceof TemporaryBall) &&!(actor instanceof FieryBall)) {
 					double x = ((Ball) actor).getX();
 					double y = ((Ball) actor).getY();
-					System.out.println(((Ball) actor).getHeight());
-					System.out.println(((Ball) actor).getWidth());
 					((Ball) actor).setFitHeight(14);
 					((Ball) actor).setFitWidth(14);
 					
@@ -129,7 +124,7 @@ public class BallWorld extends World{
 			Label lblGameOver = new Label("Game Over");
 			lblGameOver.setTextAlignment(TextAlignment.CENTER);
 	        lblGameOver.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 35));
-	        lblGameOver.setEffect(new InnerShadow(10, Color.DARKRED));
+	        lblGameOver.setEffect(new InnerShadow(10, Color.CRIMSON));
 	        
 	        FadeTransition gameOverAnimation = new FadeTransition(Duration.millis(500), lblGameOver);
 	        gameOverAnimation.setFromValue(0.1);
@@ -142,10 +137,11 @@ public class BallWorld extends World{
 	        a.setPadding(new Insets(125));
 	        a.setAlignment(Pos.BOTTOM_CENTER );
 	        
+	        this.add(a);
 			lives = -1;
 			
 		}
-		if(brickCount == 0) {
+		if(this.getBrickCount() == 1) {
 			Canvas c = new Canvas();
 			Label lblGameOver = new Label("You Passed");
 			lblGameOver.setTextAlignment(TextAlignment.CENTER);
@@ -163,7 +159,8 @@ public class BallWorld extends World{
 	        a.setPadding(new Insets(125));
 	        a.setAlignment(Pos.BOTTOM_CENTER );
 	        
-			lives = -1;
+	        this.add(a);
+	        this.setBrickCount(0);
 		}
 		
 		/*for(Node actor: this.getChildren()) {
@@ -181,15 +178,6 @@ public class BallWorld extends World{
 	public void setLife(int life) 
 	{
 		lives = life;
-	}
-	
-	public int getBrickCount() {
-		return brickCount;
-	}
-	
-	public void setBrickCount(int b) 
-	{
-		brickCount = b;
 	}
 	
 	public Score getScore(){

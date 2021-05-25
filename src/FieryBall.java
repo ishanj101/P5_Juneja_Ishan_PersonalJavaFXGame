@@ -36,6 +36,9 @@ public class FieryBall extends Ball{
 			}
 			((BallWorld)getWorld()).getScore().setScore(((BallWorld)getWorld()).getScore().getScoreCount()+100);
 			((BallWorld)getWorld()).getScore().updateDisplay();
+			if(brick.getStrength()<=1) {
+				this.getWorld().setBrickCount(this.getWorld().getBrickCount()-1);
+			}
 			brick.onHit();
 			
 		}
@@ -86,6 +89,10 @@ public class FieryBall extends Ball{
 			
 			((BallWorld)getWorld()).getScore().setScore(((BallWorld)getWorld()).getScore().getScoreCount()+100);
 			((BallWorld)getWorld()).getScore().updateDisplay();
+			
+			if(brick.getStrength()<=1) {
+				this.getWorld().setBrickCount(this.getWorld().getBrickCount()-1);
+			}
 			brick.onHit();
 			
 		}

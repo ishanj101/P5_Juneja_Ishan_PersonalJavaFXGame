@@ -108,32 +108,27 @@ public class Brick extends Actor{
     	return hitCounter;
     }
     public void strengthen() {
-    	
-    	 if(hitCounter <= 2) {
-    		 String path;
-    		 path = getClass().getClassLoader().getResource("resources/brick2.png").toString();
-    		 Image img = new Image(path);
-    		 this.setImage(img);
-    		 hitCounter = hitCounter + 1;
-    	 }
-    	 int hitC = hitCounter;
-    	 String path;
-		 if(hitC == 4) {
-	 		path = getClass().getClassLoader().getResource("resources/mbrick2.png").toString();
-	 	}else
-	 	if(hitC == 3) {
-	 		path = getClass().getClassLoader().getResource("resources/mbrick1.png").toString();
-	 	}else
-	 	if(hitC == 2) {
-	 		path = getClass().getClassLoader().getResource("resources/brick2.png").toString();
-	 	}else {
-	 		path = getClass().getClassLoader().getResource("resources/brick.png").toString();
-	 	}
-		 Image img = new Image(path,35,30, true,true);
+    	String path;
+    	if(hitCounter <= 3) {
+    		hitCounter = hitCounter + 1;
+    		int hitC = hitCounter;
+    		if(hitCounter == 4) {
+		 		path = getClass().getClassLoader().getResource("resources/mbrick2.png").toString();
+    		}else
+	    	if(hitCounter == 3) {
+	    		 path = getClass().getClassLoader().getResource("resources/mbrick1.png").toString();
+		 	}else
+		 	if(hitC == 2) {
+		 		path = getClass().getClassLoader().getResource("resources/brick2.png").toString();
+		 	}else {
+		 		path = getClass().getClassLoader().getResource("resources/brick.png").toString();
+		 	}
+			Image img = new Image(path,35,30, true,true);
 	        this.setImage(img);
-
 	        this.setFitWidth(width);
 	        this.setFitHeight(height);
+	        this.setImage(img);
+    	}
     }
     
     @Override

@@ -47,8 +47,8 @@ public class Ball extends Actor{
 					}
 					((BallWorld)getWorld()).getScore().setScore(((BallWorld)getWorld()).getScore().getScoreCount()+100);
 					((BallWorld)getWorld()).getScore().updateDisplay();
-					if(brick.getStrength()==1) {
-						this.getWorld().setBricksHit(this.getWorld().getBricksHit()-1);
+					if(brick.getStrength()<=1) {
+						this.getWorld().setBrickCount(this.getWorld().getBrickCount()-1);
 					}
 					brick.onHit();
 					
@@ -59,7 +59,7 @@ public class Ball extends Actor{
 				//paddle intersection
 				
 				if(getOneIntersectingObject(Paddle.class)!=null){
-					System.out.println("1");
+					//System.out.println("1");
 					double x = getOneIntersectingObject(Paddle.class).getX();
 					double y = getOneIntersectingObject(Paddle.class).getY();
 					Paddle paddle = getOneIntersectingObject(Paddle.class);
@@ -83,7 +83,7 @@ public class Ball extends Actor{
 					if(paddle.getDx()!=0 ){
 						
 						if((paddle.getDx() < 0 && ( getX() > paddle.getPos()|| getX() < (paddle.getPos() + paddle.getWidth()/3)))){ //getX() < paddle.getPos() + 2*(paddle.getWidth()/8)
-							System.out.println("Checking 1");
+							//System.out.println("Checking 1");
 							dx = -Math.abs(dx)-0.5;
 							dy = -dy;
 							if(dy > 0) {

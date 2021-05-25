@@ -16,7 +16,7 @@ public abstract class World extends Pane{
 	private World world = this;
 	private HashSet<KeyCode> keys;
 	private int bricksHit;
-	
+	private int brickCount;
 	public World() {
 		//List<Actor> actor = this.getChildren();
 		timer = new AnimationTimer(){
@@ -81,6 +81,15 @@ public abstract class World extends Pane{
 	
 	public void remove(StackPane l) {
 		this.getChildren().remove(l);
+	}
+	
+	public int getBrickCount() {
+		return brickCount;
+	}
+	
+	public void setBrickCount(int b) 
+	{
+		brickCount = b;
 	}
 	
 	public void start() {

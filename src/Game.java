@@ -37,34 +37,24 @@ public class Game extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         // TODO Auto-generated method stub
-        stage.setTitle("BallWorld");
+    	System.out.println("Click a number from 1 to 5 to select your level to play");
+        
+        first(stage);
+
+    }
+    
+    public void first(Stage stage) {
+    	stage.setTitle("BallWorld - Level 1");
         BorderPane rootNode = new BorderPane();
-
-        ballWorld = new BallWorld(20);
+        ballWorld = new BallWorld(18);
         ballWorld.setPrefSize(500, 500);
+        
         rootNode.setCenter(ballWorld);
-
+        
+        //Ball type
         Ball ball = new Ball();
         ball.setX(250);
         ball.setY(250);
-        
-        //ballWorld.actt();
-        
-       //
-        Label lblGameOver = new Label("Game Over");
-
-        lblGameOver.setTextAlignment(TextAlignment.CENTER);
-        lblGameOver.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.ITALIC, 35));
-        lblGameOver.setEffect(new InnerShadow(10, Color.DARKRED));
-
-        FadeTransition gameOverAnimation = new FadeTransition(Duration.millis(500), lblGameOver);
-        gameOverAnimation.setFromValue(0.1);
-        gameOverAnimation.setToValue(1);
-        gameOverAnimation.setCycleCount(-1);
-        gameOverAnimation.setAutoReverse(true);
-        gameOverAnimation.play();
-       //
-        
         
 
         paddle = new Paddle();
@@ -97,6 +87,13 @@ public class Game extends Application {
             ballWorld.add(brick);
         }
 
+        
+
+
+        ballWorld.add(ball);
+        ballWorld.add(paddle);
+        
+
         ballWorld.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -121,7 +118,11 @@ public class Game extends Application {
                 if (paddle.getX() >= speed / 2 && event.getCode() == KeyCode.LEFT) paddle.move(-speed, 0);
                 if (paddle.getX() <= ballWorld.getWidth() - paddle.getWidth() - speed / 2 && event.getCode() == KeyCode.RIGHT)
                     paddle.move(speed, 0);
+                if(event.getCode() == KeyCode.DIGIT1) {
+                	System.out.println("1");
+                }
             }
+            
         });
 
         ballWorld.setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -131,11 +132,7 @@ public class Game extends Application {
                 paddle.setDx(0);
             }
         });
-
-
-        ballWorld.add(ball);
-        ballWorld.add(paddle);
-        
+       
         ballWorld.start();
         
        
@@ -146,8 +143,6 @@ public class Game extends Application {
         stage.show();
 
         ballWorld.requestFocus();
-        
-
     }
 
 }
