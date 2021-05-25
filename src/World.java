@@ -5,8 +5,10 @@ import java.lang.Object;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 public abstract class World extends Pane{
 	
@@ -61,8 +63,24 @@ public abstract class World extends Pane{
 		this.getChildren().add(actor);
 	}
 	
+	public void add(Label l) {
+		this.getChildren().add(l);
+	}
+	
+	public void add(StackPane l) {
+		this.getChildren().add(l);
+	}
+	
 	public void remove(Actor actor) {
 		this.getChildren().remove(actor);
+	}
+	
+	public void remove(Label l) {
+		this.getChildren().remove(l);
+	}
+	
+	public void remove(StackPane l) {
+		this.getChildren().remove(l);
 	}
 	
 	public void start() {

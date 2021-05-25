@@ -104,6 +104,9 @@ public class Brick extends Actor{
 		 
     }
     
+    public int getStrength() {
+    	return hitCounter;
+    }
     public void strengthen() {
     	
     	 if(hitCounter <= 2) {

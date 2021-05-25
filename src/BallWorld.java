@@ -1,6 +1,20 @@
 import java.util.Random;
 
+import javafx.animation.FadeTransition;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Label;
+import javafx.scene.effect.InnerShadow;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 
 public class BallWorld extends World{
 
@@ -8,12 +22,14 @@ public class BallWorld extends World{
 	private long oldTime = 1;
 	private long ime = 1;
 	int lives = 3;
-	public BallWorld(){
+	int brickCount = 0;
+	public BallWorld(int bricks){
 		score = new Score();
 		score.setX(30);
 		score.setY(30);
 		this.getChildren().add(score);
 		addPower();
+		brickCount = bricks;
 		
 	}
 	public void addPower() {
@@ -109,10 +125,47 @@ public class BallWorld extends World{
 			}
 		}
 		if(lives == 0) {
-			for(Node actor: this.getChildren()) {
-				this.remove((Actor)actor);
-			}
+			Canvas c = new Canvas();
+			Label lblGameOver = new Label("Game Over");
+			lblGameOver.setTextAlignment(TextAlignment.CENTER);
+	        lblGameOver.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 35));
+	        lblGameOver.setEffect(new InnerShadow(10, Color.DARKRED));
+	        
+	        FadeTransition gameOverAnimation = new FadeTransition(Duration.millis(500), lblGameOver);
+	        gameOverAnimation.setFromValue(0.1);
+	        gameOverAnimation.setToValue(1);
+	        gameOverAnimation.setCycleCount(-1);
+	        gameOverAnimation.setAutoReverse(true);
+	        gameOverAnimation.play();
+	        
+	        StackPane a = new StackPane(c, lblGameOver);
+	        a.setPadding(new Insets(125));
+	        a.setAlignment(Pos.BOTTOM_CENTER );
+	        
+			lives = -1;
+			
 		}
+		if(brickCount == 0) {
+			Canvas c = new Canvas();
+			Label lblGameOver = new Label("You Passed");
+			lblGameOver.setTextAlignment(TextAlignment.CENTER);
+	        lblGameOver.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 35));
+	        lblGameOver.setEffect(new InnerShadow(10, Color.SPRINGGREEN));
+	        
+	        FadeTransition gameOverAnimation = new FadeTransition(Duration.millis(500), lblGameOver);
+	        gameOverAnimation.setFromValue(0.1);
+	        gameOverAnimation.setToValue(1);
+	        gameOverAnimation.setCycleCount(-1);
+	        gameOverAnimation.setAutoReverse(true);
+	        gameOverAnimation.play();
+	        
+	        StackPane a = new StackPane(c, lblGameOver);
+	        a.setPadding(new Insets(125));
+	        a.setAlignment(Pos.BOTTOM_CENTER );
+	        
+			lives = -1;
+		}
+		
 		/*for(Node actor: this.getChildren()) {
 			if(actor instanceof Paddle) {
 				System.out.println( ((Paddle)actor).getDx() );
@@ -129,6 +182,16 @@ public class BallWorld extends World{
 	{
 		lives = life;
 	}
+	
+	public int getBrickCount() {
+		return brickCount;
+	}
+	
+	public void setBrickCount(int b) 
+	{
+		brickCount = b;
+	}
+	
 	public Score getScore(){
 		return score;
 	}

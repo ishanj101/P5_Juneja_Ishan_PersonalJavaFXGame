@@ -1,17 +1,28 @@
 import java.util.Stack;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.beans.property.BooleanProperty;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 public class Game extends Application {
-	
+	public BooleanProperty gameOver;
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         launch(args);
@@ -29,7 +40,7 @@ public class Game extends Application {
         stage.setTitle("BallWorld");
         BorderPane rootNode = new BorderPane();
 
-        ballWorld = new BallWorld();
+        ballWorld = new BallWorld(20);
         ballWorld.setPrefSize(500, 500);
         rootNode.setCenter(ballWorld);
 
@@ -39,7 +50,20 @@ public class Game extends Application {
         
         //ballWorld.actt();
         
-       
+       //
+        Label lblGameOver = new Label("Game Over");
+
+        lblGameOver.setTextAlignment(TextAlignment.CENTER);
+        lblGameOver.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.ITALIC, 35));
+        lblGameOver.setEffect(new InnerShadow(10, Color.DARKRED));
+
+        FadeTransition gameOverAnimation = new FadeTransition(Duration.millis(500), lblGameOver);
+        gameOverAnimation.setFromValue(0.1);
+        gameOverAnimation.setToValue(1);
+        gameOverAnimation.setCycleCount(-1);
+        gameOverAnimation.setAutoReverse(true);
+        gameOverAnimation.play();
+       //
         
         
 
@@ -111,6 +135,7 @@ public class Game extends Application {
 
         ballWorld.add(ball);
         ballWorld.add(paddle);
+        
         ballWorld.start();
         
        
@@ -121,6 +146,7 @@ public class Game extends Application {
         stage.show();
 
         ballWorld.requestFocus();
+        
 
     }
 

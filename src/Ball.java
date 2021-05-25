@@ -47,7 +47,12 @@ public class Ball extends Actor{
 					}
 					((BallWorld)getWorld()).getScore().setScore(((BallWorld)getWorld()).getScore().getScoreCount()+100);
 					((BallWorld)getWorld()).getScore().updateDisplay();
+					if(brick.getStrength()==1) {
+						this.getWorld().setBricksHit(this.getWorld().getBricksHit()-1);
+					}
 					brick.onHit();
+					
+					
 					
 				}
 
