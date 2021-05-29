@@ -64,6 +64,7 @@ public class Enemy extends Actor{
 			this.getWorld().getChildren().remove(this);
 		}
 		if(getOneIntersectingObject(Paddle.class)!=null) {
+			((BallWorld)getWorld()).setLife(((BallWorld)getWorld()).getLife()-1);
 			for(Node actor: this.getWorld().getChildren()) {
 				if(actor instanceof Ball && !(actor instanceof TemporaryBall) &&!(actor instanceof FieryBall)) {
 					double x = ((Ball) actor).getX();

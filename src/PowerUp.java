@@ -85,8 +85,12 @@ public class PowerUp extends Actor{
 					if(actor instanceof Ball && !(actor instanceof TemporaryBall)) {
 						double x = ((Ball) actor).getX();
 						double y = ((Ball) actor).getY();
+						double dxx = ((Ball) actor).getDx();
+						double dyy = ((Ball) actor).getDy();
 						((Ball) actor).getWorld().remove((Ball)actor);
 						FieryBall ball2 = new FieryBall();
+						ball2.setSpeed(dxx,dyy);
+						
 					
 						ball2.setX(x);
 						ball2.setY(y);

@@ -28,7 +28,20 @@ public class Ball extends Actor{
 		maxDX = dxx+0.5;
 		maxDY = dyy+0.25;
 	}
+	public void setSpeed(double dxx, double dyy) {
+		dx = dxx;
+		dy = dyy;
+		maxDX = Math.abs(dx)*1.1;
+		maxDY = Math.abs(dy)*1.1;
+	}
 
+	public double getDx() {
+		return dx;
+	}
+	
+	public double getDy() {
+		return dy;
+	}
 
 	public void conditions() {
 		//normal brick intersection
@@ -107,7 +120,9 @@ public class Ball extends Actor{
 					
 					if(true){
 						if(getX() < paddle.getPos() + (paddle.getWidth()/8) || getX() >  paddle.getPos() + 7*(paddle.getWidth()/8)  ) {
+							maxDX += 0.1;
 							if(dx < 0) {
+								
 								dx = -maxDX;
 					
 							}else {
@@ -147,6 +162,7 @@ public class Ball extends Actor{
 								dy = dy - 0.25;
 							}
 							dy = -maxDY*1.25;
+							maxDY += 0.1;
 						}
 						
 					}

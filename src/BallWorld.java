@@ -22,13 +22,15 @@ public class BallWorld extends World{
 	private long oldTime = 1;
 	private long ime = 1;
 	int lives = 3;
-	public BallWorld(int bricks){
+	int level = 0;
+	public BallWorld(int bricks, int level){
 		score = new Score();
 		score.setX(30);
 		score.setY(30);
 		this.getChildren().add(score);
 		addPower();
 		setBrickCount(bricks);
+		this.level = level;
 	}
 	public void addPower() {
 		/*
@@ -61,7 +63,7 @@ public class BallWorld extends World{
 	    int xx = rand.nextInt((int) this.getWidth());
 	    int yy = rand.nextInt((int) this.getHeight());
 	    
-		if(this.getBricksHit() != 0 && this.getBricksHit()%8 == 0) {
+		if(this.getBricksHit() != 0 && this.getBricksHit()%(15 - (level * 2)) == 0) {
 			int i = rand.nextInt(2);
 			Enemy en = new Enemy(cond2);
 	        en.setX(xx);
@@ -111,8 +113,11 @@ public class BallWorld extends World{
 				if(actor instanceof FieryBall) {
 					double x = ((FieryBall) actor).getX();
 					double y = ((FieryBall) actor).getY();
+					double dxx = ((FieryBall) actor).getDx();
+					double dyy = ((FieryBall) actor).getDy();
 					((FieryBall) actor).getWorld().remove((FieryBall)actor);
 					Ball ball2 = new Ball();
+					ball2.setSpeed(dxx, dyy);
 					ball2.setX(x);
 					ball2.setY(y);
 					this.getChildren().add(ball2);

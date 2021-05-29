@@ -81,6 +81,7 @@ public class FieryBall extends Ball{
 				System.out.println("what");
 				((BallWorld)getWorld()).getScore().setScore(((BallWorld)getWorld()).getScore().getScoreCount()-1000);
 				((BallWorld)getWorld()).getScore().updateDisplay();
+				((BallWorld)getWorld()).setLife(((BallWorld)getWorld()).getLife()-1);
 			}
 		}
 		
@@ -115,5 +116,6 @@ public class FieryBall extends Ball{
 		}
 		
 	}
-
+	
+	
 }
