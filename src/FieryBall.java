@@ -53,7 +53,6 @@ public class FieryBall extends Ball{
 
 			if((paddle.getDx()==0 || paddle.getPos() == paddle.getX()) && getX() >= x && getX() <= x + getOneIntersectingObject(Paddle.class).getWidth()){
 				dy = -dy;
-				this.setY(this.getY()-4);
 			}
 			if(paddle.getDx()!=0){
 				System.out.println("Checking 1");
@@ -61,17 +60,14 @@ public class FieryBall extends Ball{
 						getX() <= paddle.getX() + paddle.getWidth()/3){
 					dx = -Math.abs(dx);
 					dy = -dy;
-					this.setY(this.getY()-4);
 				}
 				else if(getX() <= paddle.getX() + (paddle.getWidth()*2)/3){
 					dy = - dy;
-					this.setY(this.getY()-4);
 				}
 				else if(((paddle.getDx() > 0 || paddle.getPos() < paddle.getX())) &&
 				getX() >= paddle.getX() + (paddle.getWidth()*2)/3){
 					dx = Math.abs(dx);
 					dy = -dy;
-					this.setY(this.getY()-4);
 				}
 			}
 			
@@ -103,6 +99,7 @@ public class FieryBall extends Ball{
 		
 		if(getX() <= 0.1) {
 			dx = -dx;
+			this.setX(0.11);
 		}
 		if(getX() + getWidth() >= getWorld().getWidth()) {
 			dx = -dx;

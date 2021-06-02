@@ -188,10 +188,10 @@ public class Ball extends Actor{
 		//World Boundaries
 		this.move(dx, dy);
 		
-		if(getX() <= 0) {
+		if(getX() <= 3) {
 			dx = -dx;
 		}
-		if(getX() + getWidth() >= getWorld().getWidth()) {
+		if(getX() + getWidth() >= getWorld().getWidth()-2) {
 			dx = -dx;
 		}
 		

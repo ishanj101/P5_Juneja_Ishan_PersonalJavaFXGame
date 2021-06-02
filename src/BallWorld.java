@@ -63,7 +63,7 @@ public class BallWorld extends World{
 	    int xx = rand.nextInt((int) this.getWidth());
 	    int yy = rand.nextInt((int) this.getHeight());
 	    
-		if(this.getBricksHit() != 0 && this.getBricksHit()%(15 - (level * 2)) == 0) {
+		if(this.getBricksHit() != 0 && this.getBricksHit()%(15 - (level * 1.75)) == 0) {
 			int i = rand.nextInt(2);
 			Enemy en = new Enemy(cond2);
 	        en.setX(xx);
@@ -79,22 +79,22 @@ public class BallWorld extends World{
 			}
 		
 		}else if(cond == 2 || cond == 1) {
-			if(oldTime % 900 == 0) {
+			if(oldTime % (900-level*10) == 0) {
 				addPower();
 				oldTime = 1;
 			}
 		}else if(cond == 0) {
-			if(oldTime % 1100 == 0) {
+			if(oldTime % 1100-level*2 == 0) {
 				addPower();
 				oldTime = 1;
 			}
-		}else if(oldTime == 1200) {
+		}else if(oldTime == 1200-level*1.5) {
 			addPower();
 			oldTime = 1;
 		}
 		oldTime++;
 		ime++;
-		if(ime == 1000) {
+		if(ime == 1200) {
 			ime = 1;
 			for(Node actor: this.getChildren()) {
 				if(actor instanceof Ball && !(actor instanceof TemporaryBall) &&!(actor instanceof FieryBall)) {
@@ -146,7 +146,7 @@ public class BallWorld extends World{
 			lives = -1;
 			
 		}
-		if(this.getBrickCount() == 1) {
+		if(this.getBrickCount() == 0) {
 			Canvas c = new Canvas();
 			Label lblGameOver = new Label("You Passed");
 			lblGameOver.setTextAlignment(TextAlignment.CENTER);

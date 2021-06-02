@@ -138,7 +138,7 @@ public class Brick extends Actor{
     		this.setY(this.getY()+ dy);
     	}else if(canMove){
     		this.setX(this.getX()- dx);
-    		this.setY(this.getY()+ dy);
+    		this.setY(this.getY()- dy);
     	}
     	if(moveCounter >= 70) {
     		moveCounter = 0;

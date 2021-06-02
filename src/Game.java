@@ -46,9 +46,159 @@ public class Game extends Application {
     	if(choice == 2) {
     		second(stage);
         }
+    	if(choice == 3) {
+    		third(stage);
+        }
 
     }
-    
+    public void third(Stage stage) {
+    	stage.setTitle("BallWorld - Level 3");
+        BorderPane rootNode = new BorderPane();
+        ballWorld = new BallWorld(56,3);
+        ballWorld.setPrefSize(500, 500);
+        
+        rootNode.setCenter(ballWorld);
+        
+        //Ball type
+        Ball ball = new Ball();
+        ball.setX(250);
+        ball.setY(490);
+        ball.setSpeed(5,-3.25);
+        
+
+        paddle = new Paddle();
+        paddle.setX(250);
+        paddle.setY(ballWorld.getPrefHeight() - paddle.getHeight());
+        
+        Enemy trial = new Enemy();
+        trial.setX(100);
+        trial.setY(100);
+        ballWorld.add(trial);
+       
+        double brickX = 104;
+        double brickY = 300;
+        double brickWidth = 0;
+        double size = 0 ;
+        
+        brickX = 0;
+        brickY = 100;
+        for (int i = 0; i < 14; i++) {
+            Brick brick = new Brick(1,true, 0,2);
+            brick.setX(brickX);
+            brick.setY(brickY);
+            brickWidth = brick.getWidth();
+            //System.out.println(brickWidth); 32
+            size = brick.getHeight();
+            brickX += brick.getWidth()+3;
+            ballWorld.add(brick);
+        }
+        brickX = 0;
+        brickY = 150;
+        for (int i = 0; i < 14; i++) {
+            Brick brick = new Brick(1,true, 0,-3);
+            brick.setX(brickX);
+            brick.setY(brickY);
+            brickWidth = brick.getWidth();
+            //System.out.println(brickWidth); 32
+            size = brick.getHeight();
+            brickX += brick.getWidth()+3;
+            ballWorld.add(brick);
+        }
+        
+        brickX = 500;
+        brickY = 200;
+        for (int i = 0; i < 14; i++) {
+            Brick brick = new Brick(2,true, 0,2);
+            brick.setX(brickX);
+            brick.setY(brickY);
+            brickWidth = brick.getWidth();
+            //System.out.println(brickWidth); 32
+            size = brick.getHeight();
+            brickX -= brick.getWidth()-3;
+            ballWorld.add(brick);
+        }
+        
+        brickX = 0;
+        brickY = 300;
+        for (int i = 0; i < 14; i++) {
+            Brick brick = new Brick(3,true, 0,-2);
+            brick.setX(brickX);
+            brick.setY(brickY);
+            brickWidth = brick.getWidth();
+            //System.out.println(brickWidth); 32
+            size = brick.getHeight();
+            brickX += brick.getWidth()+3;
+            ballWorld.add(brick);
+        }
+        brickX = 0;
+        brickY = 350;
+        for (int i = 0; i < 7; i++) {
+            Brick brick = new Brick(2,true, 0,2);
+            brick.setX(brickX);
+            brick.setY(brickY);
+            brickWidth = brick.getWidth();
+            //System.out.println(brickWidth); 32
+            size = brick.getHeight();
+            brickX += brick.getWidth()+3 ;
+            brickX += brick.getWidth()+3 ;
+            ballWorld.add(brick);
+        }
+        
+        ballWorld.add(ball);
+        ballWorld.add(paddle);
+        
+
+        ballWorld.setOnMouseMoved(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                //paddle.setMoving(true);
+                if(event.getX()> paddle.getX()) {
+                	paddle.setDx(2);
+                }else {
+                	paddle.setDx(-2);
+                }
+                if (event.getX() <= ballWorld.getWidth() - paddle.getWidth()) paddle.setX(event.getX());
+                paddle.setPos(event.getX());
+
+            }
+        });
+
+
+        ballWorld.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                ballWorld.addKey((event.getCode()));
+                double speed = paddle.getWidth() / 3;
+                if (paddle.getX() >= speed / 2 && event.getCode() == KeyCode.LEFT) paddle.move(-speed, 0);
+                if (paddle.getX() <= ballWorld.getWidth() - paddle.getWidth() - speed / 2 && event.getCode() == KeyCode.RIGHT)
+                    paddle.move(speed, 0);
+                if(event.getCode() == KeyCode.DIGIT1) {
+                	System.out.println("1");
+                }
+            }
+            
+        });
+
+        ballWorld.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                ballWorld.removeKey((event.getCode()));
+                paddle.setDx(0);
+            }
+        });
+       
+        ballWorld.start();
+        
+       
+        
+
+        Scene scene = new Scene(rootNode);
+        stage.setScene(scene);
+        stage.show();
+
+        ballWorld.requestFocus();
+        
+    }
     public void second(Stage stage) {
     	stage.setTitle("BallWorld - Level 2");
         BorderPane rootNode = new BorderPane();
@@ -77,6 +227,7 @@ public class Game extends Application {
         double brickY = 300;
         double brickWidth = 0;
         double size = 0 ;
+        
         for (int i = 0; i < 6; i++) {
             Brick brick = new Brick(3,true,2,0);
             brick.setX(brickX);
@@ -100,6 +251,8 @@ public class Game extends Application {
             brickX += brick.getWidth()+20;
             ballWorld.add(brick);
         }
+        
+        
         
         brickX = 0;
         brickY = 100;
@@ -172,7 +325,7 @@ public class Game extends Application {
     public void first(Stage stage) {
     	stage.setTitle("BallWorld - Level 1");
         BorderPane rootNode = new BorderPane();
-        ballWorld = new BallWorld(19,1);
+        ballWorld = new BallWorld(18,1);
         ballWorld.setPrefSize(500, 500);
         
         rootNode.setCenter(ballWorld);
